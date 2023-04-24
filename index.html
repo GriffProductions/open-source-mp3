@@ -1,30 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>My Website</title>
-	<script>
-		window.onload = function() {
-			var audioFolder = "mp3/";
-			var audioElements = "";
-			var xhr = new XMLHttpRequest();
-			xhr.open("GET", audioFolder, true);
-			xhr.onreadystatechange = function() {
-				if (xhr.readyState === 4 && xhr.status === 200) {
-					var mp3Files = xhr.responseText.split("\n");
-					mp3Files.forEach(function(file) {
-						if (file.endsWith(".mp3")) {
-							var audioTag = "<audio controls><source src=\"" + audioFolder + file + "\" type=\"audio/mpeg\"></audio>";
-							audioElements += audioTag;
-						}
-					});
-					document.getElementById("audio-container").innerHTML = audioElements;
-				}
-			};
-			xhr.send();
-		};
-	</script>
+	<title>MP3 Files</title>
 </head>
 <body>
-	<div id="audio-container"></div>
+	<h1>List of MP3 Files</h1>
+	<ul id="mp3-list"></ul>
+
+	<script>
+		const mp3Folder = "mp3/";
+		const mp3List = document.getElementById("mp3-list");
+		fetch(mp3Folder)
+			.then(response => response.text())
+			.then(text => {
+				const parser = new DOMParser();
+				const html = parser.parseFromString(text, "text/html");
+				const links = html.querySelectorAll("a");
+				links.forEach(link => {
+					const href = link.getAttribute("href");
+					if (href.endsWith(".mp3")) {
+						const li = document.createElement("li");
+						const audio = document.createElement("audio");
+						audio.controls = true;
+						audio.playsinline = true;
+						audio.src = mp3Folder + href;
+						audio.textContent = "Your browser does not support the audio element.";
+						li.appendChild(audio);
+						mp3List.appendChild(li);
+					}
+				});
+			});
+	</script>
 </body>
 </html>
