@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Website</title>
+	<script>
+		window.onload = function() {
+			var audioFolder = "mp3/";
+			var audioElements = "";
+			var xhr = new XMLHttpRequest();
+			xhr.open("GET", audioFolder, true);
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState === 4 && xhr.status === 200) {
+					var mp3Files = xhr.responseText.split("\n");
+					mp3Files.forEach(function(file) {
+						if (file.endsWith(".mp3")) {
+							var audioTag = "<audio controls><source src=\"" + audioFolder + file + "\" type=\"audio/mpeg\"></audio>";
+							audioElements += audioTag;
+						}
+					});
+					document.getElementById("audio-container").innerHTML = audioElements;
+				}
+			};
+			xhr.send();
+		};
+	</script>
+</head>
+<body>
+	<div id="audio-container"></div>
+</body>
+</html>
