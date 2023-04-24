@@ -1,35 +1,56 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>MP3 Files</title>
-</head>
-<body>
-	<h1>List of MP3 Files</h1>
-	<ul id="mp3-list"></ul>
-
-	<script>
-		const mp3Folder = "mp3/";
-		const mp3List = document.getElementById("mp3-list");
-		fetch(mp3Folder)
-			.then(response => response.text())
-			.then(text => {
-				const parser = new DOMParser();
-				const html = parser.parseFromString(text, "text/html");
-				const links = html.querySelectorAll("a");
-				links.forEach(link => {
-					const href = link.getAttribute("href");
-					if (href.endsWith(".mp3")) {
-						const li = document.createElement("li");
-						const audio = document.createElement("audio");
-						audio.controls = true;
-						audio.playsinline = true;
-						audio.src = mp3Folder + href;
-						audio.textContent = "Your browser does not support the audio element.";
-						li.appendChild(audio);
-						mp3List.appendChild(li);
-					}
-				});
-			});
-	</script>
-</body>
+  <head>
+    <title>Your Title Here</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+  </head>
+  <body>
+    <audio controls>
+        <source src="mp3/1.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <audio controls>
+        <source src="mp3/2.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <audio controls>
+        <source src="mp3/3.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <audio controls>
+        <source src="mp3/4.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <audio controls>
+        <source src="mp3/5.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <audio controls>
+        <source src="mp3/6.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <audio controls>
+        <source src="mp3/1.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <audio controls>
+        <source src="mp3/7.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <audio controls>
+        <source src="mp3/8.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <audio controls>
+        <source src="mp3/9.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <audio controls>
+        <source src="mp3/10.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+      
+  </body>
 </html>
